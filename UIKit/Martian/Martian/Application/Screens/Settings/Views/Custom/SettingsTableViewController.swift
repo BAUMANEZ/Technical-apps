@@ -32,15 +32,6 @@ class SettingsTableViewController: MainTableViewController {
         }
     }
     
-    func makeNavBarItems() {
-        navigationItem.title = "Марсоходы"
-        let label = UILabel()
-        label.font = Header.small
-        label.textColor = .lightGreen
-        label.text = "ВЫБИРАЕМ"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: label)
-    }
-    
     func setHeaderAndFooter() {
         tableView.tableHeaderView = TableViewSpacer(separatedFrom: .bottom)
         tableView.tableFooterView = TableViewSpacer(separatedFrom: .top)
@@ -51,8 +42,14 @@ class SettingsTableViewController: MainTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         assignViewModel()
-        makeNavBarItems()
+        makeNavBarTextItems(title: "Марсоход", subtitle: "ВЫБИРАЕМ")
         setHeaderAndFooter()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        (viewModel as? SettingsViewModel)?.updateModel() {
+            self.tableView.reloadData()
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

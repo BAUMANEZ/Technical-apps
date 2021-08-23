@@ -35,6 +35,7 @@
 		8440C5C626D3E59B001925DC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440C5C526D3E59B001925DC /* Constants.swift */; };
 		8440C5C826D3EF08001925DC /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440C5C726D3EF08001925DC /* TableView.swift */; };
 		8440C5CB26D3EFFD001925DC /* TableViewSpacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440C5CA26D3EFFD001925DC /* TableViewSpacer.swift */; };
+		84F59F4726D419F600B0EADC /* CamerasTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F59F4626D419F600B0EADC /* CamerasTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		8440C5C526D3E59B001925DC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8440C5C726D3EF08001925DC /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		8440C5CA26D3EFFD001925DC /* TableViewSpacer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSpacer.swift; sourceTree = "<group>"; };
+		84F59F4626D419F600B0EADC /* CamerasTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamerasTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,7 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				8440C59B26D3A484001925DC /* Settings */,
-				8440C59026D399A3001925DC /* Main */,
+				8440C59026D399A3001925DC /* Cameras */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -180,14 +182,14 @@
 			path = Colors;
 			sourceTree = "<group>";
 		};
-		8440C59026D399A3001925DC /* Main */ = {
+		8440C59026D399A3001925DC /* Cameras */ = {
 			isa = PBXGroup;
 			children = (
 				8440C59326D399C2001925DC /* Model */,
 				8440C59226D399BC001925DC /* Views */,
 				8440C59126D399B1001925DC /* ViewModel */,
 			);
-			path = Main;
+			path = Cameras;
 			sourceTree = "<group>";
 		};
 		8440C59126D399B1001925DC /* ViewModel */ = {
@@ -200,6 +202,7 @@
 		8440C59226D399BC001925DC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				84F59F4626D419F600B0EADC /* CamerasTableViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				8440C5C226D3E2A3001925DC /* RoverSelectionViewModel.swift in Sources */,
 				8440C5C426D3E4BC001925DC /* Label.swift in Sources */,
 				8440C5B626D3AE9A001925DC /* Response.swift in Sources */,
+				84F59F4726D419F600B0EADC /* CamerasTableViewController.swift in Sources */,
 				8440C59A26D39C6F001925DC /* MainTabBarController.swift in Sources */,
 				8440C5BA26D3DA87001925DC /* SettingViewModel.swift in Sources */,
 				8440C59826D39B91001925DC /* Anchors.swift in Sources */,

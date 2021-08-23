@@ -31,6 +31,15 @@ class MainTableViewController: UITableViewController , TableViewControllerDesign
     
     func registerCells() { }
     
+    func makeNavBarTextItems(title: String, subtitle: String) {
+        navigationItem.title = title
+        let label = UILabel()
+        label.font = Header.small
+        label.textColor = .lightGreen
+        label.text = subtitle
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: label)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationBar()

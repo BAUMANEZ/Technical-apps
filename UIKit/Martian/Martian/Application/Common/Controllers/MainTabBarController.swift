@@ -21,8 +21,8 @@ final class MainTabBarController: UITabBarController {
         tabBar.tintColor = .selected
         tabBar.barTintColor = .white
         
-        let camerasItem  = (UIViewController(), "Камеры", "quality")
-        let settingsItem = (SettingsTableViewController(), "Настройки", "settings")
+        let camerasItem:  TabBarItemTuple = (CamerasTableViewController(), "Камеры", "quality")
+        let settingsItem: TabBarItemTuple = (SettingsTableViewController(), "Настройки", "settings")
         
         viewControllers = [
             camerasItem,
