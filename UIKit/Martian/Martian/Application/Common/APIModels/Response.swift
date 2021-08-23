@@ -11,6 +11,10 @@ struct RoversList: Decodable {
     let rovers: [Rover]
 }
 
+struct PhotosList: Decodable {
+    let photos: [Photo]
+}
+
 struct Rover: Decodable {
     let id: Int
     let name: String

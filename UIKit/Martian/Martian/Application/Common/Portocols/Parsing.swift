@@ -14,6 +14,6 @@ enum APIError: Error {
 }
 
 protocol ParsingProtocol {
-    func parsePhotos(for date: Date, completion: @escaping (Result<PhotoArray, APIError>) -> ())
+    func parsePhotos(for date: Date, completion: @escaping (Result<PhotosList, APIError>) -> ())
     func parseRovers(completion: @escaping (Result<RoversList, APIError>) -> ())
 }

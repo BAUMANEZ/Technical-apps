@@ -8,9 +8,6 @@
 import UIKit
 import Alamofire
 
-typealias RoverArray = [Rover]
-typealias PhotoArray = [Photo]
-
 class APIRequest {
     private static let APIKey = "thJZ9IHrinJFa6GVjDunDRMMerozdsRXkpEffxch"
     static var shared: ParsingProtocol = APIRequest()
@@ -38,10 +35,10 @@ extension APIRequest: ParsingProtocol {
         }
     }
     
-    func parsePhotos(for date: Date, completion: @escaping (Result<PhotoArray, APIError>) -> ()) {
+    func parsePhotos(for date: Date, completion: @escaping (Result<PhotosList, APIError>) -> ()) {
         switch makeRoverPhotosURL(for: date) {
         case .success(let url):
-            AF.request(url).validate().responseDecodable(of: PhotoArray.self) { respone in
+            AF.request(url).validate().responseDecodable(of: PhotosList.self) { respone in
                 guard
                     let parsedData = respone.value
                 else {
