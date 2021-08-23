@@ -32,13 +32,27 @@ class SettingsTableViewController: MainTableViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        assignViewModel()
+    func makeNavBarItems() {
+        navigationItem.title = "Марсоходы"
+        let label = UILabel()
+        label.font = Header.small
+        label.textColor = .lightGreen
+        label.text = "ВЫБИРАЕМ"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: label)
+    }
+    
+    func setHeaderAndFooter() {
         tableView.tableHeaderView = TableViewSpacer(separatedFrom: .bottom)
         tableView.tableFooterView = TableViewSpacer(separatedFrom: .top)
         sizeHeaderToFit()
         sizeFooterToFit()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        assignViewModel()
+        makeNavBarItems()
+        setHeaderAndFooter()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

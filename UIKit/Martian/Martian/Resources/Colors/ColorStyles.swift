@@ -30,8 +30,10 @@ extension UIColor {
         return colorForTheme(light: UIColor("#6D00FF"), dark: UIColor("000"))
     }
     
-    static var unselected: UIColor {
-        return colorForTheme(light: UIColor("#2A2C3D"), dark: UIColor("000"))
+    static var unselected = primary
+    
+    static var lightGreen: UIColor {
+        return colorForTheme(light: UIColor("#B8C2CC"), dark: UIColor("000"))
     }
 }
 

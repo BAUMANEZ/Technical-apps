@@ -27,7 +27,6 @@ extension ViewControllerDesignable  {
             .foregroundColor : UIColor.primary,
             .font : Header.big ?? UIFont.preferredFont(forTextStyle: .largeTitle)
         ]
-        navigationItem.title = "Марсоходы"
     }
     
     func setStandartDesign() {
