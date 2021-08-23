@@ -20,12 +20,13 @@ class SettingsTableViewController: MainTableViewController {
                 let self = self,
                 let model = self.viewModel?.model as? RoversList
             else { return }
-            let selectedRover = UserDefaults.standard.string(forKey: "chosen rover") ?? "Spirit"
+            let selectedRoverName = UserDefaults.standard.string(forKey: "chosen rover") ?? "Spirit"
+            UserDefaults.standard.set(selectedRoverName, forKey: "chosen rover")
             self.displayCells =
                 model.rovers.compactMap {
                     RoverSelectionViewModel(cellType: RoverSelectionCell.self,
                                             name: $0.name,
-                                            isSelected: $0.name == selectedRover)
+                                            isSelected: $0.name == selectedRoverName)
                 }
             self.tableView.reloadData()
         }
@@ -41,6 +42,7 @@ class SettingsTableViewController: MainTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let newRoverPosition = indexPath.row
         guard
             let oldRoverName = UserDefaults.standard.string(forKey: "chosen rover"),
@@ -55,7 +57,8 @@ class SettingsTableViewController: MainTableViewController {
         displayCells[newRoverPosition] = selectedRoverViewModel
         displayCells[oldRoverPosition] = unselectedRoverViewModel
         UserDefaults.standard.set(newRoverName, forKey: "chosen rover")
-        tableView.reloadData()
+        tableView.reloadRows(at: [IndexPath(row: newRoverPosition, section: 0)], with: .automatic)
+        tableView.reloadRows(at: [IndexPath(row: oldRoverPosition, section: 0)], with: .none)
     }
 }
 
