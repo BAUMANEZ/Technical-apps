@@ -26,6 +26,7 @@ class SettingsViewModel: ViewModel {
             case .failure(let error):
                 debugPrint(error.localizedDescription)
             }
+            completion?()
         }
     }
     
