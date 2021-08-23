@@ -15,7 +15,7 @@ class CamerasTableViewController: MainTableViewController {
     var selectedDate: String {
         let date = Date() // temporary
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd.mm.yyyy"
+        dateFormatter.dateFormat = "dd.MM.yyyy"
         return dateFormatter.string(from: date)
     }
     
