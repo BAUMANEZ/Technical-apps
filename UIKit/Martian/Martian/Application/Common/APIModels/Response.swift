@@ -20,7 +20,7 @@ struct Rover: Decodable {
     let maxSol: UInt
     let maxDate: String
     let totalPhotos: UInt
-    //let cameras: [Camera]
+    let cameras: [Camera]
     
     private enum CodingKeys: String, CodingKey {
         case id
@@ -31,14 +31,14 @@ struct Rover: Decodable {
         case maxSol = "max_sol"
         case maxDate = "max_date"
         case totalPhotos = "total_photos"
-        //case cameras
+        case cameras
     }
 }
 
 struct Camera: Decodable {
-    let id: UUID
+    let id: Int
     let name: String
-    let roverID: UUID
+    let roverID: Int
     let fullName: String
     
     private enum CodingKeys: String, CodingKey {
@@ -50,11 +50,11 @@ struct Camera: Decodable {
 }
 
 struct Photo: Decodable {
-    let id: UUID
+    let id: Int
     let sol: UInt
     let camera: Camera
     let imageSource: String
-    let earthDate: Date
+    let earthDate: String
     let rover: Rover
     
     private enum CodingKeys: String, CodingKey {

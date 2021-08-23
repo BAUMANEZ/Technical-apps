@@ -16,11 +16,6 @@ class SettingsViewModel: ViewModel {
         }
     }
     
-    func selectedRover(at indexPath: IndexPath) {
-//        (model as? RoversList)?.rovers.forEach {
-//            $0.
-//        }
-    }
     
     func updateModel(completion: (() -> ())? = nil) {
         APIRequest.shared.parseRovers { [weak self] result in
