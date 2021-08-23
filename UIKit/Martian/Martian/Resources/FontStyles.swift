@@ -1,0 +1,23 @@
+//
+//  FontStyles.swift
+//  Martian
+//
+//  Created by Арсений Токарев on 23.08.2021.
+//
+
+import UIKit
+
+struct Header {
+    static let big    = UIFont(name: "Helvetica-Bold", size: 36)
+    static let normal = UIFont(name: "Helvetica-Bold", size: 18)
+    
+    private init() {}
+}
+
+struct Body {
+    static let big    = UIFont(name: "Helvetica", size: 18)
+    static let normal = UIFont(name: "Helvetica", size: 16)
+    static let small  = UIFont(name: "Helvetica", size: 12)
+    
+    private init() {}
+}
