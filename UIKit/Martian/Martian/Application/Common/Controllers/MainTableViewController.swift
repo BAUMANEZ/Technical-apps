@@ -7,9 +7,12 @@
 
 import UIKit
 
-class MainTableViewController: UITableViewController , TableViewControllerDesignable {
+class MainTableViewController: UITableViewController , TableViewControllerDesignable, ViewModelConnectable {
     
-    var displayCells: [[CellViewModel]] = []
+    var viewModel: ViewModel?
+    var displayCells: [CellViewModel] = []
+    
+    func assignViewModel() { } //No need to call super
     
     func setStandartInteractionOptions() {
         tableView.alwaysBounceVertical = false
@@ -20,9 +23,10 @@ class MainTableViewController: UITableViewController , TableViewControllerDesign
     
     func setStandartDesign() {
         tableView.backgroundColor = .systemBackground
+        tableView.separatorColor = .gray
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
         tableView.showsVerticalScrollIndicator = false
         tableView.showsHorizontalScrollIndicator = false
-        tableView.tableFooterView = UIView(frame: .zero)
     }
     
     func registerCells() { }
@@ -39,18 +43,17 @@ class MainTableViewController: UITableViewController , TableViewControllerDesign
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return displayCells.count
+        1
     }
     
     override func tableView(
         _ tableView: UITableView, numberOfRowsInSection section: Int
     ) -> Int {
-        guard section < displayCells.count else { return 0 }
-        return displayCells[section].count
+        return displayCells.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellViewModel = displayCells[indexPath.section][indexPath.row]
+        let cellViewModel = displayCells[indexPath.row]
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(cellViewModel.cellType)", for: indexPath) as? TableViewRepresentable
         else {
             return UITableViewCell()

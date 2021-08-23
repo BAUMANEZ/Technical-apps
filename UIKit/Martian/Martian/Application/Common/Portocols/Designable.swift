@@ -38,7 +38,7 @@ extension ViewControllerDesignable  {
 
 //MARK: - Table View Controller Protocols
 protocol TableViewControllerDesignable: UITableViewController, ViewControllerDesignable {
-    var displayCells: [[CellViewModel]] { get set }
+    var displayCells: [CellViewModel] { get set }
     
     func setStandartInteractionOptions()
     func registerCells()

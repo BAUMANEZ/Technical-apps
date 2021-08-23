@@ -37,5 +37,7 @@ extension UIColor {
 
 //MARK: - Background
 extension UIColor {
-    // ....
+    static var gray: UIColor {
+        return colorForTheme(light: UIColor("EFF1F3"), dark: UIColor("EFF1F3"))
+    }
 }
