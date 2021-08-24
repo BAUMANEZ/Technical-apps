@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct RoverSelectionViewModel: CellViewModel {
+struct RoverSelectionCellViewModel: TableViewCellViewModel {
     var cellType: UITableViewCell.Type
     var name: String
     var isSelected: Bool

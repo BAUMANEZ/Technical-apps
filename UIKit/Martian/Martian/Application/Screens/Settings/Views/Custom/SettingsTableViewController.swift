@@ -24,7 +24,7 @@ class SettingsTableViewController: MainTableViewController {
             UserDefaults.standard.set(selectedRoverName, forKey: "chosen rover")
             self.displayCells =
                 model.rovers.compactMap {
-                    RoverSelectionViewModel(cellType: RoverSelectionCell.self,
+                    RoverSelectionCellViewModel(cellType: RoverSelectionCell.self,
                                             name: $0.name,
                                             isSelected: $0.name == selectedRoverName)
                 }
@@ -57,14 +57,14 @@ class SettingsTableViewController: MainTableViewController {
         let newRoverPosition = indexPath.row
         guard
             let oldRoverName = UserDefaults.standard.string(forKey: "chosen rover"),
-            let newRoverName = (displayCells[indexPath.row] as? RoverSelectionViewModel)?.name,
-            let oldRoverPosition = (displayCells as? [RoverSelectionViewModel])?.firstIndex(where: {
+            let newRoverName = (displayCells[indexPath.row] as? RoverSelectionCellViewModel)?.name,
+            let oldRoverPosition = (displayCells as? [RoverSelectionCellViewModel])?.firstIndex(where: {
                 $0.name == oldRoverName
             }),
             newRoverPosition != oldRoverPosition
         else { return }
-        let selectedRoverViewModel = RoverSelectionViewModel(cellType: RoverSelectionCell.self, name: newRoverName, isSelected: true)
-        let unselectedRoverViewModel = RoverSelectionViewModel(cellType: RoverSelectionCell.self, name: oldRoverName, isSelected: false)
+        let selectedRoverViewModel = RoverSelectionCellViewModel(cellType: RoverSelectionCell.self, name: newRoverName, isSelected: true)
+        let unselectedRoverViewModel = RoverSelectionCellViewModel(cellType: RoverSelectionCell.self, name: oldRoverName, isSelected: false)
         displayCells[newRoverPosition] = selectedRoverViewModel
         displayCells[oldRoverPosition] = unselectedRoverViewModel
         UserDefaults.standard.set(newRoverName, forKey: "chosen rover")

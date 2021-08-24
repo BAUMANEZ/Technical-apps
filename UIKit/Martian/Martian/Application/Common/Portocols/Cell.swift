@@ -7,17 +7,31 @@
 
 import UIKit
 
-//MARK: - Cell Protocols
-protocol CellViewModel {
-    var cellType: UITableViewCell.Type { get }
-}
-
-protocol CellViewModelSettable: UITableViewCell {
-    func setViewModel(_ viewModel: CellViewModel)
-}
-
-protocol CellIdentifiable: UITableViewCell {
+protocol CellIdentifiable {
     var cellIndentifier: String { get }
 }
 
-protocol TableViewRepresentable: CellIdentifiable, CellViewModelSettable {  }
+//MARK: - Table View Cell Protocols
+
+protocol TableViewCellViewModel {
+    var cellType: UITableViewCell.Type { get }
+}
+
+protocol TableViewCellViewModelSettable: UITableViewCell {
+    func setViewModel(_ viewModel: TableViewCellViewModel)
+}
+
+protocol TableViewRepresentable: CellIdentifiable, TableViewCellViewModelSettable {}
+
+
+//MARK: - Collection View Cell Protocols
+protocol CollectionViewCellViewModel {
+    var cellType: UICollectionViewCell.Type { get }
+}
+
+protocol CollectionViewCellViewModelSettable: UICollectionViewCell {
+    func setViewModel(_ viewModel: CollectionViewCellViewModel)
+}
+
+protocol CollectionViewRepresentable: CellIdentifiable, CollectionViewCellViewModelSettable {}
+

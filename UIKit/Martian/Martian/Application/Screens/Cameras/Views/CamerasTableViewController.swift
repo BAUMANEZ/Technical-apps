@@ -27,7 +27,10 @@ class CamerasTableViewController: MainTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        makeNavBarTextItems(title: selectedRoverName, subtitle: selectedDate)
         makeNavBarButtons()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        makeNavBarTextItems(title: selectedRoverName, subtitle: selectedDate)
     }
 }

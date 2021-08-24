@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Nuke
 
 final class MainTabBarController: UITabBarController {
     
@@ -36,15 +37,18 @@ final class MainTabBarController: UITabBarController {
 //MARK: - Tab bar item container
 extension MainTabBarController {
     func createTabBarItem(with itemDescription: TabBarItemTuple ) -> UINavigationController {
-        let tabBarItem = UITabBarItem(title: itemDescription.title,
-                                      image: UIImage(named: itemDescription.imageName),
+        let image = UIImage(named: itemDescription.imageName)
+        let title = itemDescription.title
+        let viewController = itemDescription.viewController
+        let tabBarItem = UITabBarItem(title: title,
+                                      image: image,
                                       selectedImage: nil)
         tabBarItem.setTitleTextAttributes(
             [NSAttributedString.Key.font : Body.small ?? UIFont.systemFont(ofSize: 12)],
             for: .normal)
-        itemDescription.viewController.tabBarItem = tabBarItem
+        viewController.tabBarItem = tabBarItem
         
-        return UINavigationController(rootViewController: itemDescription.viewController)
+        return UINavigationController(rootViewController: viewController)
     }
     
 }

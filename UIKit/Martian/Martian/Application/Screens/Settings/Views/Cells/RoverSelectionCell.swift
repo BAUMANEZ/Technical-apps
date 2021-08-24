@@ -14,8 +14,8 @@ class RoverSelectionCell: UITableViewCell, TableViewRepresentable {
     private let checkboxImageView = UIImageView()
     
     
-    func setViewModel(_ viewModel: CellViewModel) {
-        guard let viewModel = viewModel as? RoverSelectionViewModel else { return }
+    func setViewModel(_ viewModel: TableViewCellViewModel) {
+        guard let viewModel = viewModel as? RoverSelectionCellViewModel else { return }
         titleLabel.text = viewModel.name
         if viewModel.isSelected {
             titleLabel.textColor = .selected
@@ -27,23 +27,25 @@ class RoverSelectionCell: UITableViewCell, TableViewRepresentable {
     }
     
     private func configureLabel() {
-        _ = titleLabel.useConstraints(on: contentView)
         titleLabel.setStyle(font: Body.normal, textAlignment: .left)
         
-        titleLabel.firstBaselineAnchor.constraint(equalTo: contentView.topAnchor, constant: 26).isActive = true
-        titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16).isActive = true
+        contentView.addSubview(titleLabel, anchors: [
+            .leading(16),
+            .relative(attribute: .firstBaseline, relation: .equal, relatedTo: .top, multiplier: 1, constant: 26),
+            .relative(attribute: .lastBaseline, relation: .equal, relatedTo: .bottom, multiplier: 1, constant: -18)
+        ])
         titleLabel.trailingAnchor.constraint(equalTo: checkboxImageView.leadingAnchor, constant: -16).isActive = true
     }
     
     private func configureImageView() {
-        _ = checkboxImageView.useConstraints(on: contentView)
         checkboxImageView.image = UIImage(named: "checkbox")?.withRenderingMode(.alwaysOriginal)
         checkboxImageView.contentMode = .scaleAspectFit
         
-        checkboxImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12).isActive = true
-        checkboxImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
-        checkboxImageView.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        checkboxImageView.heightAnchor.constraint(equalTo: checkboxImageView.widthAnchor).isActive = true
+        contentView.addSubview(checkboxImageView, anchors: [
+            .top(12),
+            .trailing(-16),
+            .width(20), .height(20)
+        ])
     }
     
     private func configureSubviews() {

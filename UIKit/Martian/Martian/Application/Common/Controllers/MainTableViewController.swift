@@ -10,7 +10,7 @@ import UIKit
 class MainTableViewController: UITableViewController , TableViewControllerDesignable, ViewModelConnectable {
     
     var viewModel: ViewModel?
-    var displayCells: [CellViewModel] = []
+    var displayCells: [TableViewCellViewModel] = []
     
     func assignViewModel() { } //No need to call super
     

@@ -33,4 +33,5 @@ class SettingsViewModel: ViewModel {
     init() {
         updateModel()
     }
+    
 }

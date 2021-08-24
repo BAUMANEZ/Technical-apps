@@ -35,10 +35,26 @@ extension ViewControllerDesignable  {
 }
 
 
-//MARK: - Table View Controller Protocols
-protocol TableViewControllerDesignable: UITableViewController, ViewControllerDesignable {
-    var displayCells: [CellViewModel] { get set }
-    
-    func setStandartInteractionOptions()
+// MARK: - Cell Relative protocols
+protocol CellRegistable {
     func registerCells()
+}
+
+protocol Interactive {
+    func setStandartInteractionOptions()
+}
+
+//MARK: - Table View Controller Protocols
+protocol TableViewDesignable: CellRegistable, Interactive {}
+
+protocol TableViewControllerDesignable: ViewControllerDesignable, TableViewDesignable {
+    var displayCells: [TableViewCellViewModel] { get set }
+}
+
+
+//MARK: - Collection View Controller Protocols
+protocol CollectionViewDesignable: CellRegistable, Interactive { }
+
+protocol CollectionViewControllerDesignable: ViewControllerDesignable, CollectionViewDesignable {
+    var displayCells: [CollectionViewCellViewModel] { get set }
 }
