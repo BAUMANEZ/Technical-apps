@@ -10,7 +10,7 @@ import UIKit
 class MainTableViewController: UITableViewController , TableViewControllerDesignable, ViewModelConnectable {
     
     var viewModel: ViewModel?
-    var displayCells: [TableViewCellViewModel] = []
+    var tableViewCells: [TableViewCellViewModel] = []
     
     func assignViewModel() { } //No need to call super
     
@@ -18,7 +18,7 @@ class MainTableViewController: UITableViewController , TableViewControllerDesign
         tableView.alwaysBounceVertical = false
         tableView.alwaysBounceHorizontal = false
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 100
+        tableView.estimatedRowHeight = 200
     }
     
     func setStandartDesign() {
@@ -31,7 +31,7 @@ class MainTableViewController: UITableViewController , TableViewControllerDesign
     
     func registerCells() { }
     
-    func makeNavBarTextItems(title: String, subtitle: String) {
+    func makeNavBarTextItems(title: String?, subtitle: String?) {
         navigationItem.title = title
         let label = UILabel()
         label.font = Header.small
@@ -40,15 +40,25 @@ class MainTableViewController: UITableViewController , TableViewControllerDesign
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: label)
     }
     
+    func setHeaderAndFooter() {}
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        assignViewModel()
+        setStandartDesign()
+        setStandartInteractionOptions()
+        setHeaderAndFooter()
         setNavigationBar()
         registerCells()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        setStandartDesign()
-        setStandartInteractionOptions()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        (viewModel as? StandartViewModel)?.updateModel() {
+            self.tableView.reloadData()
+        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -58,11 +68,11 @@ class MainTableViewController: UITableViewController , TableViewControllerDesign
     override func tableView(
         _ tableView: UITableView, numberOfRowsInSection section: Int
     ) -> Int {
-        return displayCells.count
+        return tableViewCells.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellViewModel = displayCells[indexPath.row]
+        let cellViewModel = tableViewCells[indexPath.row]
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(cellViewModel.cellType)", for: indexPath) as? TableViewRepresentable
         else {
             return UITableViewCell()

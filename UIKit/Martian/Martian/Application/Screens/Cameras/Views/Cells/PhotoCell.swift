@@ -8,8 +8,8 @@
 import UIKit
 import Nuke
 
-class PhotoCell: UICollectionViewCell, CollectionViewCellViewModelSettable, Identifiable {
-    var cellIdentifiel: String = "PhotoCell"
+class PhotoCell: UICollectionViewCell, CollectionViewRepresentable {
+    var cellIndentifier: String = "PhotoCell"
     
     private let titleLabel = UILabel()
     private let subtitleLabel = UILabel()
@@ -22,22 +22,41 @@ class PhotoCell: UICollectionViewCell, CollectionViewCellViewModelSettable, Iden
         subtitleLabel.text = photoCellViewModel.subtitle
     }
     
-    func configureTitleLabel() {
-        _ = titleLabel.useConstraints(on: contentView)
-        titleLabel.setStyle(font: Body.big, textAlignment: .left, numberOfLines: 0, textColor: .primary)
+    private func configureTitleLabel() {
+        titleLabel.setStyle(font: Body.normal, textAlignment: .left, numberOfLines: 0, textColor: .primary)
+        
+        contentView.addSubview(titleLabel, anchors: [.leading(0), .trailing(0)])
+        titleLabel.activate(anchors: [
+            .relative(attribute: .firstBaseline, relation: .equal, relatedTo: .top, multiplier: 1, constant: 24)
+        ], relativeTo: imageView)
     }
     
-    func configureSubtitleLabel() {
-        _ = subtitleLabel.useConstraints(on: contentView)
-        subtitleLabel.setStyle(font: Body.normal, textAlignment: .left, numberOfLines: 0, textColor: .lightGreen)
+    private func configureSubtitleLabel() {
+        subtitleLabel.setStyle(font: Body.small, textAlignment: .left, numberOfLines: 0, textColor: .lightGreen)
+        
+        contentView.addSubview(subtitleLabel, anchors: [
+            .leading(0), .trailing(0),
+            .relative(attribute: .lastBaseline, relation: .equal, relatedTo: .bottom, multiplier: 1, constant: -8)
+        ])
+        subtitleLabel.activate(anchors: [
+            .relative(attribute: .firstBaseline, relation: .equal, relatedTo: .lastBaseline, multiplier: 1, constant: 16)
+        ], relativeTo: titleLabel)
     }
     
-    func configureImageView() {
-        _ = imageView.useConstraints(on: contentView)
+    private func configureImageView() {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 4
         
-        imageView.activate(anchors: [.leading(0), .trailing(0), .top(0)], relativeTo: contentView)
+        contentView.addSubview(imageView, anchors: [.leading(0), .trailing(0), .top(0)])
+        imageView.activate(anchors: [
+            .relative(attribute: .height, relation: .equal, relatedTo: .width, multiplier: CGFloat(9 / 16), constant: 0)
+        ], relativeTo: self)
+    }
+    
+    private func configureSubiviews() {
+        configureImageView()
+        configureTitleLabel()
+        configureSubtitleLabel()
     }
     
     init() {

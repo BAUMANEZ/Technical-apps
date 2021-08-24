@@ -10,6 +10,7 @@ import Alamofire
 
 class APIRequest {
     private static let APIKey = "thJZ9IHrinJFa6GVjDunDRMMerozdsRXkpEffxch"
+    private(set) var latestParsedModel: Decodable?
     static var shared: ParsingProtocol = APIRequest()
     
     public init() {}
@@ -18,16 +19,22 @@ class APIRequest {
 //MARK: - Parsing functions
 extension APIRequest: ParsingProtocol {
     
+    func get(rover: String?) -> Rover? {
+        return nil
+    }
+    
     func parseRovers(completion: @escaping (Result<RoversList, APIError>) -> ()) {
         switch makeRoversListURL() {
         case .success(let url):
-            AF.request(url).validate().responseDecodable(of: RoversList.self) { respone in
+            AF.request(url).validate().responseDecodable(of: RoversList.self) { [weak self ]respone in
                 guard
+                    let self = self,
                     let parsedData = respone.value
                 else {
                     completion(.failure(.parsingFailure))
                     return
                 }
+                self.latestParsedModel = parsedData
                 completion(.success(parsedData))
             }
         case .failure(let error):
@@ -58,7 +65,7 @@ extension APIRequest {
     
     //Gets date from user input and saved chosen rover then forms the URL
     private func makeRoverPhotosURL(for date: Date) -> Result<URL, APIError> {
-        let formattedDate = dateToString(date)
+        let formattedDate = DateFormatter().string(from: date, format: "yyyy-MM-dd")
         guard let chosenRover = UserDefaults.standard.string(forKey: "chosen rover") else {
             return .failure(.roverNotFound)
         }
@@ -77,12 +84,5 @@ extension APIRequest {
         }
         
         return .success(url)
-    }
-    
-    //Simple date formatting
-    private func dateToString(_ date: Date = Date()) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-mm-dd"
-        return dateFormatter.string(from: date)
     }
 }

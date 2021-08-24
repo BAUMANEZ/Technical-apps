@@ -46,15 +46,17 @@ protocol Interactive {
 
 //MARK: - Table View Controller Protocols
 protocol TableViewDesignable: CellRegistable, Interactive {}
-
-protocol TableViewControllerDesignable: ViewControllerDesignable, TableViewDesignable {
-    var displayCells: [TableViewCellViewModel] { get set }
+protocol TableViewCellDisplayable {
+    var tableViewCells: [TableViewCellViewModel] { get set }
 }
+
+protocol TableViewControllerDesignable: ViewControllerDesignable, TableViewDesignable { }
 
 
 //MARK: - Collection View Controller Protocols
 protocol CollectionViewDesignable: CellRegistable, Interactive { }
-
-protocol CollectionViewControllerDesignable: ViewControllerDesignable, CollectionViewDesignable {
-    var displayCells: [CollectionViewCellViewModel] { get set }
+protocol CollectionViewCellDisplayable {
+    var collectionViewCells: [CollectionViewCellViewModel] { get set }
 }
+
+protocol CollectionViewControllerDesignable: ViewControllerDesignable, CollectionViewDesignable, CollectionViewCellDisplayable { }

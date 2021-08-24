@@ -7,17 +7,24 @@
 
 import UIKit
 
-class SettingsViewModel: ViewModel {
+class StandartViewModel: ViewModel {
     var bindViewModelToView: (() -> ())?
     
-     private(set) var model: Decodable? {
+    var model: Decodable? {
         didSet {
             bindViewModelToView?()
         }
     }
     
+    func updateModel(completion: (() -> ())? = nil) { }
     
-    func updateModel(completion: (() -> ())? = nil) {
+    init() {
+        updateModel()
+    }
+}
+
+class SettingsViewModel: StandartViewModel {
+    override func updateModel(completion: (() -> ())? = nil) {
         APIRequest.shared.parseRovers { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -29,9 +36,4 @@ class SettingsViewModel: ViewModel {
             completion?()
         }
     }
-    
-    init() {
-        updateModel()
-    }
-    
 }

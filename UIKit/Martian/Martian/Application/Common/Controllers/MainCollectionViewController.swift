@@ -7,55 +7,31 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
-class MainCollectionView: UICollectionView, CollectionViewDesignable  {
-    var displayCells: [CollectionViewCellViewModel] = []
+class MainCollectionViewController: UICollectionViewController, ViewModelConnectable, CollectionViewControllerDesignable {
+    var collectionViewCells: [CollectionViewCellViewModel] = []
+    var viewModel: ViewModel?
     
     func setStandartInteractionOptions() { }
     
     func registerCells() { }
     
-}
-
-
-class MainCollectionViewController: UICollectionViewController, ViewModelConnectable, CollectionViewControllerDesignable {
-    var displayCells: [CollectionViewCellViewModel] = []
-    
-    func setStandartInteractionOptions() {
-        
-    }
-    
-    func registerCells() {
-        
-    }
-    
-    
-    var viewModel: ViewModel?
-    
-    func assignViewModel() {
-        
-    }
-    
-    
-    
+    func assignViewModel() { }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
+        return collectionViewCells.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        // Configure the cell
-    
+        let cellViewModel = collectionViewCells[indexPath.row]
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(cellViewModel.cellType)", for: indexPath) as? CollectionViewRepresentable
+        else {
+            return UICollectionViewCell()
+        }
+        cell.setViewModel(cellViewModel)
         return cell
     }
 }

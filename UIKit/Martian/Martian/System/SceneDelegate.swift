@@ -19,8 +19,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: scene.coordinateSpace.bounds)
         window?.windowScene = scene
-        window?.rootViewController = MainTabBarController()
-        window?.makeKeyAndVisible()
+        self.window?.rootViewController = MainTabBarController()
+        self.window?.makeKeyAndVisible()
+//        APIRequest.shared.parseRovers { [weak self] result in
+//            guard let self = self else { return }
+//            switch result {
+//            case .success(let rovers):
+//                let selectedRover = UserDefaults.standard.string(forKey: "chosen rover") ?? "Spirit"
+//                UserDefaults.standard.set(selectedRover, forKey: "chosen rover")
+//                let maxDate = rovers.rovers.first(where: {
+//                    $0.name == selectedRover
+//                })?.maxDate
+//                UserDefaults.standard.set(maxDate, forKey: "max date")
+//            case .failure(_):
+//                //Possible feature: show screnn informing about connection error or something else
+//                return
+//            }
+//        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

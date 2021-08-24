@@ -21,8 +21,7 @@ class SettingsTableViewController: MainTableViewController {
                 let model = self.viewModel?.model as? RoversList
             else { return }
             let selectedRoverName = UserDefaults.standard.string(forKey: "chosen rover") ?? "Spirit"
-            UserDefaults.standard.set(selectedRoverName, forKey: "chosen rover")
-            self.displayCells =
+            self.tableViewCells =
                 model.rovers.compactMap {
                     RoverSelectionCellViewModel(cellType: RoverSelectionCell.self,
                                             name: $0.name,
@@ -32,7 +31,7 @@ class SettingsTableViewController: MainTableViewController {
         }
     }
     
-    func setHeaderAndFooter() {
+    override func setHeaderAndFooter() {
         tableView.tableHeaderView = TableViewSpacer(separatedFrom: .bottom)
         tableView.tableFooterView = TableViewSpacer(separatedFrom: .top)
         sizeHeaderToFit()
@@ -41,15 +40,7 @@ class SettingsTableViewController: MainTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        assignViewModel()
         makeNavBarTextItems(title: "Марсоход", subtitle: "ВЫБИРАЕМ")
-        setHeaderAndFooter()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        (viewModel as? SettingsViewModel)?.updateModel() {
-            self.tableView.reloadData()
-        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -57,16 +48,16 @@ class SettingsTableViewController: MainTableViewController {
         let newRoverPosition = indexPath.row
         guard
             let oldRoverName = UserDefaults.standard.string(forKey: "chosen rover"),
-            let newRoverName = (displayCells[indexPath.row] as? RoverSelectionCellViewModel)?.name,
-            let oldRoverPosition = (displayCells as? [RoverSelectionCellViewModel])?.firstIndex(where: {
+            let newRoverName = (tableViewCells[indexPath.row] as? RoverSelectionCellViewModel)?.name,
+            let oldRoverPosition = (tableViewCells as? [RoverSelectionCellViewModel])?.firstIndex(where: {
                 $0.name == oldRoverName
             }),
             newRoverPosition != oldRoverPosition
         else { return }
         let selectedRoverViewModel = RoverSelectionCellViewModel(cellType: RoverSelectionCell.self, name: newRoverName, isSelected: true)
         let unselectedRoverViewModel = RoverSelectionCellViewModel(cellType: RoverSelectionCell.self, name: oldRoverName, isSelected: false)
-        displayCells[newRoverPosition] = selectedRoverViewModel
-        displayCells[oldRoverPosition] = unselectedRoverViewModel
+        tableViewCells[newRoverPosition] = selectedRoverViewModel
+        tableViewCells[oldRoverPosition] = unselectedRoverViewModel
         UserDefaults.standard.set(newRoverName, forKey: "chosen rover")
         tableView.reloadRows(at: [IndexPath(row: newRoverPosition, section: 0)], with: .automatic)
         tableView.reloadRows(at: [IndexPath(row: oldRoverPosition, section: 0)], with: .none)

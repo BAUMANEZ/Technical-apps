@@ -14,6 +14,9 @@ enum APIError: Error {
 }
 
 protocol ParsingProtocol {
+    var latestParsedModel: Decodable? { get }
+    
+    func get(rover: String?) -> Rover?
     func parsePhotos(for date: Date, completion: @escaping (Result<PhotosList, APIError>) -> ())
     func parseRovers(completion: @escaping (Result<RoversList, APIError>) -> ())
 }
