@@ -10,13 +10,13 @@ import UIKit
 struct Header {
     static let big    = UIFont(name: "Helvetica-Bold", size: 34)
     static let normal = UIFont(name: "Helvetica-Bold", size: 16)
-    static let small  = UIFont(name: "Helvetica-Bold", size: 11)
+    static let small  = UIFont(name: "Helvetica-Bold", size: 8)
     private init() {}
 }
 
 struct Body {
     static let big    = UIFont(name: "Helvetica", size: 18)
-    static let normal = UIFont(name: "Helvetica", size: 16)
+    static let normal = UIFont(name: "Helvetica", size: 13)
     static let small  = UIFont(name: "Helvetica", size: 12)
     
     private init() {}

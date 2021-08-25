@@ -17,3 +17,9 @@ extension CGFloat {
     static var hugeMargin: CGFloat = 20
     static var enormousMargin: CGFloat = 24
 }
+
+//MARK: - Cell Heights
+extension CGFloat {
+    static var photoCellHeight: CGFloat = 121
+    static var cameraNameCellHeight: CGFloat = 52
+}

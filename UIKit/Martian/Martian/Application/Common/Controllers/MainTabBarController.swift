@@ -53,4 +53,24 @@ extension MainTabBarController {
     
 }
 
+extension MainTabBarController: Networking {
+    func didLoad(maxDate: String?) {
+        if
+            let navigationController = viewControllers?[0] as? UINavigationController,
+            let camerasViewController = navigationController.viewControllers.first as? CamerasTableViewController
+        {
+            (camerasViewController.viewModel as? CamerasViewModel)?.loadDateFrom(maxDate)
+        }
+    }
+    
+    func didLoad(roverList: RoversList) {
+        if
+            let navigationController = viewControllers?[1] as? UINavigationController,
+            let settingsViewController = navigationController.viewControllers.first as? SettingsTableViewController
+        {
+            (settingsViewController.viewModel as? SettingsViewModel)?.getRoversFrom(roverList)
+        }
+    }
+}
+
 

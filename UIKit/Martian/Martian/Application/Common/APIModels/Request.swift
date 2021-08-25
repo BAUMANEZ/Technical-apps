@@ -26,7 +26,7 @@ extension APIRequest: ParsingProtocol {
     func parseRovers(completion: @escaping (Result<RoversList, APIError>) -> ()) {
         switch makeRoversListURL() {
         case .success(let url):
-            AF.request(url).validate().responseDecodable(of: RoversList.self) { [weak self ]respone in
+            AF.request(url).validate().responseDecodable(of: RoversList.self) { [weak self] respone in
                 guard
                     let self = self,
                     let parsedData = respone.value
@@ -69,13 +69,13 @@ extension APIRequest {
         guard let chosenRover = UserDefaults.standard.string(forKey: "chosen rover") else {
             return .failure(.roverNotFound)
         }
-        let urlString = "https://api.nasa.gov/mars-photos/api/v1/rovers/\(chosenRover)/photos?earth_date=\(formattedDate)&api_key=\(APIRequest.APIKey)"
-        return makeURL(string: urlString)
+        let photosURL = "https://api.nasa.gov/mars-photos/api/v1/rovers/\(chosenRover)/photos?earth_date=\(formattedDate)&api_key=\(APIRequest.APIKey)"
+        return makeURL(string: photosURL)
     }
     
     private func makeRoversListURL() -> Result<URL, APIError> {
-        let urlString = "https://api.nasa.gov/mars-photos/api/v1/rovers/?api_key=\(APIRequest.APIKey)"
-        return makeURL(string: urlString)
+        let roversURL = "https://api.nasa.gov/mars-photos/api/v1/rovers/?api_key=\(APIRequest.APIKey)"
+        return makeURL(string: roversURL)
     }
     
     private func makeURL(string: String) -> Result<URL, APIError> {

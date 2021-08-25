@@ -12,12 +12,11 @@ class CamerasTableViewController: MainTableViewController {
         return UserDefaults.standard.string(forKey: "chosen rover") ?? "Spirit"
     }
     
-    var selectedDate: String? {
-        return nil
-    }
+    var selectedDate: Date!
     
     override func registerCells() {
-        tableView.register(CameraCell.self, forCellReuseIdentifier: "CameraCell")
+        tableView.register(PhotosCollectionCell.self, forCellReuseIdentifier: "PhotosCollectionCell")
+        tableView.register(CameraNameCell.self, forCellReuseIdentifier: "CameraNameCell")
     }
     
     func makeNavBarButtons() {
@@ -35,19 +34,28 @@ class CamerasTableViewController: MainTableViewController {
                 let self = self,
                 let photos = (self.viewModel?.model as? PhotosList)?.photos
             else { return }
+            self.tableViewCells.removeAll()
             let cameraNames = photos.map { $0.camera.name }.uniqued()
-            self.tableViewCells = cameraNames.map { cameraName in
+            cameraNames.forEach { cameraName in
+                //HEADER OF A CELL
+                self.tableViewCells.append(
+                    CameraNameCellViewModel(cellType: CameraNameCell.self,
+                                            cameraName: cameraName)
+                )
+
+                //CONTENT OF A CELL
                 let photosFromTheCamera = photos.filter { photo in
                     cameraName == photo.camera.name
                 }.map {
-                    PhotoCellViewModell(cellType: PhotoCell.self,
+                    PhotoCellViewModel(cellType: PhotoCell.self,
                                         imageURL: $0.imageSource,
-                                        title: "id #\($0.id)",
-                                        subtitle: "SOL #\($0.sol)")
+                                        title: "ID #\($0.id)",
+                                        subtitle: "СОЛ #\($0.sol)")
                 }
-                return CameraCellViewModel(cellType: CameraCell.self,
-                                           cameraName: cameraName,
-                                           photos: photosFromTheCamera)
+                self.tableViewCells += [
+                    PhotosCollectionCellViewModel(cellType: PhotosCollectionCell.self,
+                                                  photos: photosFromTheCamera)
+                ]
             }
             self.tableView.reloadData()
         }
@@ -71,6 +79,23 @@ class CamerasTableViewController: MainTableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        makeNavBarTextItems(title: selectedRoverName, subtitle: selectedDate)
+        makeNavBarTextItems(title: selectedRoverName, subtitle: "")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        (viewModel as? CamerasViewModel)?.update()
+    }
+}
+
+extension CamerasTableViewController {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch tableViewCells[indexPath.row].cellType {
+        case is CameraNameCell.Type:
+            return .cameraNameCellHeight
+        case is PhotosCollectionCell.Type:
+            return .photoCellHeight
+        default:
+            return 0
+        }
     }
 }

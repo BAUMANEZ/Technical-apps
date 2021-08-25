@@ -11,11 +11,13 @@
 		8407E56D26D4EAD70000DD85 /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407E56C26D4EAD70000DD85 /* MainCollectionViewController.swift */; };
 		8407E57026D4F2420000DD85 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407E56F26D4F2420000DD85 /* PhotoCell.swift */; };
 		8407E57226D4FD320000DD85 /* Collection+TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407E57126D4FD320000DD85 /* Collection+TableViewDataSource.swift */; };
-		8407E57426D503420000DD85 /* CameraCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407E57326D503420000DD85 /* CameraCell.swift */; };
-		8407E57626D503A80000DD85 /* CameraCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407E57526D503A80000DD85 /* CameraCellViewModel.swift */; };
+		8407E57426D503420000DD85 /* PhotosCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407E57326D503420000DD85 /* PhotosCollectionCell.swift */; };
+		8407E57626D503A80000DD85 /* PhotosCollectionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407E57526D503A80000DD85 /* PhotosCollectionCellViewModel.swift */; };
 		8407E57A26D5161E0000DD85 /* CamerasViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407E57926D5161E0000DD85 /* CamerasViewModel.swift */; };
 		8407E57E26D51D8A0000DD85 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407E57D26D51D8A0000DD85 /* Date.swift */; };
 		8407E58026D53B440000DD85 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407E57F26D53B440000DD85 /* Sequence.swift */; };
+		8407E58226D683F80000DD85 /* CameraNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407E58126D683F80000DD85 /* CameraNameCell.swift */; };
+		8407E58426D684050000DD85 /* CameraNameCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407E58326D684050000DD85 /* CameraNameCellViewModel.swift */; };
 		8440C56F26D38B7A001925DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440C56E26D38B7A001925DC /* AppDelegate.swift */; };
 		8440C57126D38B7A001925DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440C57026D38B7A001925DC /* SceneDelegate.swift */; };
 		8440C57826D38B7D001925DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8440C57726D38B7D001925DC /* Assets.xcassets */; };
@@ -52,11 +54,13 @@
 		8407E56C26D4EAD70000DD85 /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
 		8407E56F26D4F2420000DD85 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		8407E57126D4FD320000DD85 /* Collection+TableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+TableViewDataSource.swift"; sourceTree = "<group>"; };
-		8407E57326D503420000DD85 /* CameraCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraCell.swift; sourceTree = "<group>"; };
-		8407E57526D503A80000DD85 /* CameraCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraCellViewModel.swift; sourceTree = "<group>"; };
+		8407E57326D503420000DD85 /* PhotosCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionCell.swift; sourceTree = "<group>"; };
+		8407E57526D503A80000DD85 /* PhotosCollectionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionCellViewModel.swift; sourceTree = "<group>"; };
 		8407E57926D5161E0000DD85 /* CamerasViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamerasViewModel.swift; sourceTree = "<group>"; };
 		8407E57D26D51D8A0000DD85 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		8407E57F26D53B440000DD85 /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
+		8407E58126D683F80000DD85 /* CameraNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraNameCell.swift; sourceTree = "<group>"; };
+		8407E58326D684050000DD85 /* CameraNameCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraNameCellViewModel.swift; sourceTree = "<group>"; };
 		8440C56B26D38B7A001925DC /* Martian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Martian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8440C56E26D38B7A001925DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8440C57026D38B7A001925DC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,8 +108,9 @@
 		8407E56E26D4F22C0000DD85 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				8407E58126D683F80000DD85 /* CameraNameCell.swift */,
+				8407E57326D503420000DD85 /* PhotosCollectionCell.swift */,
 				8407E56F26D4F2420000DD85 /* PhotoCell.swift */,
-				8407E57326D503420000DD85 /* CameraCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -114,7 +119,8 @@
 			isa = PBXGroup;
 			children = (
 				8407E56A26D4EA5B0000DD85 /* PhotoCellViewModel.swift */,
-				8407E57526D503A80000DD85 /* CameraCellViewModel.swift */,
+				8407E57526D503A80000DD85 /* PhotosCollectionCellViewModel.swift */,
+				8407E58326D684050000DD85 /* CameraNameCellViewModel.swift */,
 			);
 			path = CellRelated;
 			sourceTree = "<group>";
@@ -429,20 +435,22 @@
 				8440C59A26D39C6F001925DC /* MainTabBarController.swift in Sources */,
 				8440C5BA26D3DA87001925DC /* SettingViewModel.swift in Sources */,
 				8440C59826D39B91001925DC /* Anchors.swift in Sources */,
+				8407E58226D683F80000DD85 /* CameraNameCell.swift in Sources */,
 				8440C59E26D3A4CA001925DC /* MainTableViewController.swift in Sources */,
 				8407E56B26D4EA5B0000DD85 /* PhotoCellViewModel.swift in Sources */,
 				8440C5C826D3EF08001925DC /* TableView.swift in Sources */,
 				8440C5CB26D3EFFD001925DC /* TableViewSpacer.swift in Sources */,
 				8440C58C26D397C5001925DC /* HexConverter.swift in Sources */,
 				8407E57E26D51D8A0000DD85 /* Date.swift in Sources */,
-				8407E57626D503A80000DD85 /* CameraCellViewModel.swift in Sources */,
+				8407E58426D684050000DD85 /* CameraNameCellViewModel.swift in Sources */,
+				8407E57626D503A80000DD85 /* PhotosCollectionCellViewModel.swift in Sources */,
 				8440C5BC26D3DAA8001925DC /* ViewModel.swift in Sources */,
 				8440C5AC26D3ACC8001925DC /* View.swift in Sources */,
 				8407E57226D4FD320000DD85 /* Collection+TableViewDataSource.swift in Sources */,
 				8440C5AF26D3ADF1001925DC /* StackView.swift in Sources */,
 				8440C5A426D3A602001925DC /* Cell.swift in Sources */,
 				8407E57A26D5161E0000DD85 /* CamerasViewModel.swift in Sources */,
-				8407E57426D503420000DD85 /* CameraCell.swift in Sources */,
+				8407E57426D503420000DD85 /* PhotosCollectionCell.swift in Sources */,
 				8440C5B826D3B577001925DC /* Parsing.swift in Sources */,
 				8440C5C026D3E1B8001925DC /* RoverSelectionCell.swift in Sources */,
 				8440C5B426D3AE94001925DC /* Request.swift in Sources */,

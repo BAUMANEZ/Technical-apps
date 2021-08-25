@@ -7,8 +7,7 @@
 
 import UIKit
 
-struct CameraCellViewModel: TableViewCellViewModel {
+struct PhotosCollectionCellViewModel: TableViewCellViewModel {
     var cellType: UITableViewCell.Type
-    var cameraName: String?
-    var photos: [PhotoCellViewModell]
+    var photos: [PhotoCellViewModel]
 }

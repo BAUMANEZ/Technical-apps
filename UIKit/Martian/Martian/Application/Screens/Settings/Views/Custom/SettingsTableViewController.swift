@@ -44,7 +44,9 @@ class SettingsTableViewController: MainTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+//        if let newRoverName = (tableViewCells[indexPath.row] as? RoverSelectionCellViewModel)?.name {
+//            UserDefaults.standard.set(newRoverName, forKey: "chosen rover")
+//        }
         let newRoverPosition = indexPath.row
         guard
             let oldRoverName = UserDefaults.standard.string(forKey: "chosen rover"),

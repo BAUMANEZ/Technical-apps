@@ -13,7 +13,6 @@ class RoverSelectionCell: UITableViewCell, TableViewRepresentable {
     private let titleLabel = UILabel()
     private let checkboxImageView = UIImageView()
     
-    
     func setViewModel(_ viewModel: TableViewCellViewModel) {
         guard let viewModel = viewModel as? RoverSelectionCellViewModel else { return }
         titleLabel.text = viewModel.name

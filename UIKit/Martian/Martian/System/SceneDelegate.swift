@@ -7,35 +7,45 @@
 
 import UIKit
 
+
+protocol Networking: AnyObject {
+    func didLoad(roverList: RoversList)
+    func didLoad(maxDate: String?)
+}
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    weak var networkDelegate: Networking?
 
+    func loadInitialData() {
+        APIRequest.shared.parseRovers { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let rovers):
+                let selectedRoverName = UserDefaults.standard.string(forKey: "chosen rover") ?? "Spirit"
+                UserDefaults.standard.set(selectedRoverName, forKey: "chosen rover")
+                let maxDate = rovers.rovers.first(where: {
+                    $0.name == selectedRoverName
+                })?.maxDate
+                UserDefaults.standard.set(maxDate, forKey: "max date")
+                self.networkDelegate?.didLoad(maxDate: maxDate)
+                self.networkDelegate?.didLoad(roverList: rovers)
+            case .failure(_):
+                //Possible feature: show 💩 or ☹️
+                return
+            }
+        }
+    }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let scene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(frame: scene.coordinateSpace.bounds)
-        window?.windowScene = scene
-        self.window?.rootViewController = MainTabBarController()
-        self.window?.makeKeyAndVisible()
-//        APIRequest.shared.parseRovers { [weak self] result in
-//            guard let self = self else { return }
-//            switch result {
-//            case .success(let rovers):
-//                let selectedRover = UserDefaults.standard.string(forKey: "chosen rover") ?? "Spirit"
-//                UserDefaults.standard.set(selectedRover, forKey: "chosen rover")
-//                let maxDate = rovers.rovers.first(where: {
-//                    $0.name == selectedRover
-//                })?.maxDate
-//                UserDefaults.standard.set(maxDate, forKey: "max date")
-//            case .failure(_):
-//                //Possible feature: show screnn informing about connection error or something else
-//                return
-//            }
-//        }
+        let viewController = MainTabBarController()
+        networkDelegate = viewController
+        window = UIWindow(windowScene: scene)
+        window?.rootViewController = viewController
+        window?.makeKeyAndVisible()
+        loadInitialData()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct PhotoCellViewModell: CollectionViewCellViewModel {
+struct PhotoCellViewModel: CollectionViewCellViewModel {
     var cellType: UICollectionViewCell.Type
     var imageURL: String?
     var title: String?

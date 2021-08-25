@@ -8,10 +8,28 @@
 import UIKit
 
 class CamerasViewModel: StandartViewModel {
+    enum DateSwitch {
+        case next, previous
+    }
     
-    override func updateModel(completion: (() -> ())? = nil) {
-        let day = Calendar.current.date(byAdding: .day, value: -3, to: Date())
-        APIRequest.shared.parsePhotos(for: day!) { [weak self] result in
+    private(set) var date: Date?
+    
+    func switchDate(_ switcher: DateSwitch) {
+        let increment: Int = switcher == DateSwitch.next ? 1 : -1
+        if let previousDate = date {
+            date = Calendar.current.date(byAdding: .day, value: increment, to: previousDate)
+        }
+        update()
+    }
+    
+    func loadDateFrom(_ maxDate: String?) {
+        if let maxDate = maxDate {
+            date = DateFormatter().date(from: maxDate)
+        }
+    }
+    
+    func update() {
+        APIRequest.shared.parsePhotos(for: date ?? Date()) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let photos):
@@ -19,7 +37,6 @@ class CamerasViewModel: StandartViewModel {
             case .failure(let error):
                 debugPrint(error.localizedDescription)
             }
-            completion?()
         }
     }
 }
