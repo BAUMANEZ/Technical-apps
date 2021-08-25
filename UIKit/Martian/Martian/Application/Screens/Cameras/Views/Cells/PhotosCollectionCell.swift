@@ -7,21 +7,11 @@
 
 import UIKit
 
-class PhotosCollectionCell: UITableViewCell, TableViewRepresentable, CollectionViewCellDisplayable {
+class PhotosCollectionCell: UITableViewCell, TableViewRepresentable,CollectionViewCellDisplayable {
     var collectionViewCells: [CollectionViewCellViewModel] = []
     var cellIndentifier: String = "PhotosCollectionCell"
     
-    private let photosCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.alwaysBounceHorizontal = false
-        collectionView.alwaysBounceVertical = false
-        collectionView.isScrollEnabled = false
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.showsHorizontalScrollIndicator = false
-        return UICollectionView(frame: .zero, collectionViewLayout: layout)
-    }()
+    private let photosCollectionView = PhotoCollectionView(scrollDirection: .horizontal)
     
     func setViewModel(_ viewModel: TableViewCellViewModel) {
         guard let cameraCellViewModel = viewModel as? PhotosCollectionCellViewModel else { return }
@@ -30,6 +20,7 @@ class PhotosCollectionCell: UITableViewCell, TableViewRepresentable, CollectionV
     }
     
     private func configureCollectionView() {
+
         photosCollectionView.delegate = self
         photosCollectionView.dataSource = self
         photosCollectionView.backgroundColor = .clear
@@ -71,6 +62,6 @@ extension PhotosCollectionCell: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 138, height: .photoCellHeight)
+        return CGSize(width: 138, height: .photoCellSmallHeight)
     }
 }

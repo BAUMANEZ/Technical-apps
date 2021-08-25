@@ -47,7 +47,6 @@ extension MainTabBarController {
             [NSAttributedString.Key.font : Body.small ?? UIFont.systemFont(ofSize: 12)],
             for: .normal)
         viewController.tabBarItem = tabBarItem
-        
         return UINavigationController(rootViewController: viewController)
     }
     

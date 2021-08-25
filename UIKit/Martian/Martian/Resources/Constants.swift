@@ -13,13 +13,14 @@ extension CGFloat {
     static var smallMargin: CGFloat = 4
     static var mediumMargin: CGFloat = 8
     static var bigMargin: CGFloat = 12
-    static var largeMargin: CGFloat = 16
+    static var largeMargin: CGFloat = 14
     static var hugeMargin: CGFloat = 20
     static var enormousMargin: CGFloat = 24
 }
 
 //MARK: - Cell Heights
 extension CGFloat {
-    static var photoCellHeight: CGFloat = 121
+    static var photoCellSmallHeight: CGFloat = 121
+    static var photoCellBigHeight: CGFloat = 150
     static var cameraNameCellHeight: CGFloat = 52
 }

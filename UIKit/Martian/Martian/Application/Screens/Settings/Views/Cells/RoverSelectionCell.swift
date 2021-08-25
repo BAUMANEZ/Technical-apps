@@ -8,6 +8,7 @@
 import UIKit
 
 class RoverSelectionCell: UITableViewCell, TableViewRepresentable {
+    
     var cellIndentifier: String = "RoverSelectionCell"
     
     private let titleLabel = UILabel()

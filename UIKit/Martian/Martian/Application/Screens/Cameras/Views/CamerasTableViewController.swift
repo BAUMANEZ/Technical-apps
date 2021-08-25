@@ -57,9 +57,10 @@ class CamerasTableViewController: MainTableViewController {
                     cameraName == photo.camera.name
                 }.map {
                     PhotoCellViewModel(cellType: PhotoCell.self,
-                                        imageURL: $0.imageSource,
-                                        title: "ID #\($0.id)",
-                                        subtitle: "СОЛ #\($0.sol)")
+                                       imageURL: $0.imageSource,
+                                       imageScaleMode: .small,
+                                       title: "id #\($0.id)",
+                                       subtitle: "СОЛ #\($0.sol)")
                 }
                 self.tableViewCells += [
                     PhotosCollectionCellViewModel(cellType: PhotosCollectionCell.self,
@@ -103,9 +104,30 @@ extension CamerasTableViewController {
         case is CameraNameCell.Type:
             return .cameraNameCellHeight
         case is PhotosCollectionCell.Type:
-            return .photoCellHeight
+            return .photoCellSmallHeight
         default:
             return 0
         }
+    }
+    
+}
+
+extension CamerasTableViewController: CameraNameCellDelegate {
+    func didTapCamera(with name: String?) {
+        //Extracting photos
+        guard
+            let indexOfCameraNameSection = tableViewCells.firstIndex(where: {($0 as? CameraNameCellViewModel)?.cameraName == name}),
+            let photoCellViewModels = (tableViewCells[indexOfCameraNameSection + 1] as? PhotosCollectionCellViewModel)?.photos
+        else { return }
+        let photosCollectionViewController = PhotosCollectionViewController()
+        photosCollectionViewController.collectionViewCells = photoCellViewModels.map {
+            PhotoCellViewModel(cellType: $0.cellType,
+                               imageURL: $0.imageURL,
+                               imageScaleMode: .big,
+                               title: $0.title,
+                               subtitle: $0.subtitle)
+        }
+        
+        navigationController?.pushViewController(photosCollectionViewController, animated: true)
     }
 }

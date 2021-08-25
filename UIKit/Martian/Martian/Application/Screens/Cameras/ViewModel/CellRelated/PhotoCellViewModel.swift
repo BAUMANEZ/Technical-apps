@@ -10,6 +10,7 @@ import UIKit
 struct PhotoCellViewModel: CollectionViewCellViewModel {
     var cellType: UICollectionViewCell.Type
     var imageURL: String?
+    var imageScaleMode: ImageScaleMode
     var title: String?
     var subtitle: String?
 }

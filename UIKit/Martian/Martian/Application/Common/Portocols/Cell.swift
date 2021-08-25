@@ -11,6 +11,8 @@ protocol CellIdentifiable {
     var cellIndentifier: String { get }
 }
 
+protocol CellDelegate: AnyObject { }
+
 //MARK: - Table View Cell Protocols
 
 protocol TableViewCellViewModel {
@@ -19,6 +21,10 @@ protocol TableViewCellViewModel {
 
 protocol TableViewCellViewModelSettable: UITableViewCell {
     func setViewModel(_ viewModel: TableViewCellViewModel)
+}
+
+protocol Delegatable: AnyObject {
+    var delegate: CellDelegate? { get set }
 }
 
 protocol TableViewRepresentable: CellIdentifiable, TableViewCellViewModelSettable {}

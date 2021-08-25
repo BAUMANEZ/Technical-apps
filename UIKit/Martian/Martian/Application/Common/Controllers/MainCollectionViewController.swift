@@ -7,6 +7,29 @@
 
 import UIKit
 
+class PhotoCollectionView: UICollectionView, CollectionViewDesignable {
+    func registerCells() { }
+    
+    func setStandartInteractionOptions() {
+        alwaysBounceHorizontal = false
+        alwaysBounceVertical = false
+        showsVerticalScrollIndicator = false
+        showsHorizontalScrollIndicator = false
+    }
+    
+    
+    init(scrollDirection: UICollectionView.ScrollDirection) {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = scrollDirection
+        super.init(frame: .zero, collectionViewLayout: layout)
+        setStandartInteractionOptions()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 class MainCollectionViewController: UICollectionViewController, ViewModelConnectable, CollectionViewControllerDesignable {
     var collectionViewCells: [CollectionViewCellViewModel] = []
     var viewModel: ViewModel?
@@ -16,6 +39,18 @@ class MainCollectionViewController: UICollectionViewController, ViewModelConnect
     func registerCells() { }
     
     func assignViewModel() { }
+    
+    func setStandartDesign() {
+        collectionView.backgroundColor = .systemBackground
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setStandartDesign()
+        setStandartInteractionOptions()
+        setNavigationBar()
+        registerCells()
+    }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1

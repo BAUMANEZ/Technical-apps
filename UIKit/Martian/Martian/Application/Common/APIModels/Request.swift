@@ -9,7 +9,8 @@ import UIKit
 import Alamofire
 
 class APIRequest {
-    private static let APIKey = "thJZ9IHrinJFa6GVjDunDRMMerozdsRXkpEffxch"
+    private static let APIKey = "Jk0SRQy1JsFuiZYrJhUKbEACiaQ9UvZj051uosQn" 
+        //"thJZ9IHrinJFa6GVjDunDRMMerozdsRXkpEffxch"
     private(set) var latestParsedModel: Decodable?
     static var shared: ParsingProtocol = APIRequest()
     

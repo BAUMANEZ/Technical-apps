@@ -8,8 +8,25 @@
 import UIKit
 import Nuke
 
+enum ImageScaleMode {
+    case big, small
+}
+
 class PhotoCell: UICollectionViewCell, CollectionViewRepresentable {
+    
     var cellIndentifier: String = "PhotoCell"
+    private var imageScaleMode: ImageScaleMode = .small {
+        didSet {
+            let heightConstant: CGFloat
+            switch imageScaleMode {
+            case .small:
+                heightConstant = 76
+            case .big:
+                heightConstant = 104
+            }
+            imageView.heightAnchor.constraint(equalToConstant: heightConstant).isActive = true
+        }
+    }
     
     private let titleLabel = UILabel()
     private let subtitleLabel = UILabel()
@@ -21,6 +38,7 @@ class PhotoCell: UICollectionViewCell, CollectionViewRepresentable {
         Nuke.loadImage(with: url, into: imageView)
         titleLabel.text = photoCellViewModel.title
         subtitleLabel.text = photoCellViewModel.subtitle
+        imageScaleMode = photoCellViewModel.imageScaleMode
     }
     
     private func configureTitleLabel() {
@@ -53,8 +71,7 @@ class PhotoCell: UICollectionViewCell, CollectionViewRepresentable {
         imageView.activate(anchors: [
             .leading(0),
             .trailing(0),
-            .top(0),
-            .height(76)
+            .top(0)
         ], relativeTo: contentView)
     }
     

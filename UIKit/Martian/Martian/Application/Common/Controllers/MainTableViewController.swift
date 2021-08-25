@@ -62,6 +62,7 @@ class MainTableViewController: UITableViewController , TableViewControllerDesign
         else {
             return UITableViewCell()
         }
+        (cell as? Delegatable)?.delegate = self
         cell.setViewModel(cellViewModel)
         return cell
     }
@@ -78,5 +79,9 @@ class MainTableViewController: UITableViewController , TableViewControllerDesign
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+}
+
+extension MainTableViewController: CellDelegate {
     
 }

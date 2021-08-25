@@ -7,7 +7,13 @@
 
 import UIKit
 
-class CameraNameCell: UITableViewCell, TableViewRepresentable {
+protocol CameraNameCellDelegate: CellDelegate {
+    func didTapCamera(with name: String?)
+}
+
+class CameraNameCell: UITableViewCell, TableViewRepresentable, Delegatable {
+    var delegate: CellDelegate?
+    
     var cellIndentifier: String = "CameraNameCell"
     
     private let cameraNameLabel = UILabel()
@@ -38,9 +44,20 @@ class CameraNameCell: UITableViewCell, TableViewRepresentable {
         containerStackView.pin(to: contentView, top: 16, leading: 16, bottom: -16)
     }
     
+    private func addTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapCell))
+        showMoreImage.isUserInteractionEnabled = true
+        showMoreImage.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func didTapCell() {
+        (delegate as? CameraNameCellDelegate)?.didTapCamera(with: cameraNameLabel.text)
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureNameAndShowMoreView()
+        addTapGesture()
     }
     
     required init?(coder: NSCoder) {
