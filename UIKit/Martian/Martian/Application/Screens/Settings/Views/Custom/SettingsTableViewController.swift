@@ -31,22 +31,15 @@ class SettingsTableViewController: MainTableViewController {
         }
     }
     
-    override func setHeaderAndFooter() {
-        tableView.tableHeaderView = TableViewSpacer(separatedFrom: .bottom)
-        tableView.tableFooterView = TableViewSpacer(separatedFrom: .top)
-        sizeHeaderToFit()
-        sizeFooterToFit()
+    private func updateMaxDate(for rover: String) {
+        guard
+            let model = self.viewModel?.model as? RoversList,
+            let newMaxDate = model.rovers.first(where: { $0.name == rover })?.maxDate
+        else { return }
+        UserDefaults.standard.set(newMaxDate, forKey: "date")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        makeNavBarTextItems(title: "Марсоход", subtitle: "ВЫБИРАЕМ")
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if let newRoverName = (tableViewCells[indexPath.row] as? RoverSelectionCellViewModel)?.name {
-//            UserDefaults.standard.set(newRoverName, forKey: "chosen rover")
-//        }
+    private func changeRover(from indexPath: IndexPath) {
         let newRoverPosition = indexPath.row
         guard
             let oldRoverName = UserDefaults.standard.string(forKey: "chosen rover"),
@@ -61,8 +54,25 @@ class SettingsTableViewController: MainTableViewController {
         tableViewCells[newRoverPosition] = selectedRoverViewModel
         tableViewCells[oldRoverPosition] = unselectedRoverViewModel
         UserDefaults.standard.set(newRoverName, forKey: "chosen rover")
+        updateMaxDate(for: newRoverName)
         tableView.reloadRows(at: [IndexPath(row: newRoverPosition, section: 0)], with: .automatic)
         tableView.reloadRows(at: [IndexPath(row: oldRoverPosition, section: 0)], with: .none)
+    }
+    
+    override func setHeaderAndFooter() {
+        tableView.tableHeaderView = TableViewSpacer(separatedFrom: .bottom)
+        tableView.tableFooterView = TableViewSpacer(separatedFrom: .top)
+        sizeHeaderToFit()
+        sizeFooterToFit()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        makeNavBarTextItems(title: "Марсоход", subtitle: "ВЫБИРАЕМ")
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        changeRover(from: indexPath)
     }
 }
 

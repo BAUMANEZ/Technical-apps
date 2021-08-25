@@ -21,7 +21,7 @@ extension ViewControllerDesignable  {
         navigationBar.prefersLargeTitles = true
         navigationBar.titleTextAttributes = [
             .foregroundColor : UIColor.primary,
-            .font : Header.normal ?? UIFont.preferredFont(forTextStyle: .subheadline)
+            .font : Header.medium ?? UIFont.preferredFont(forTextStyle: .subheadline)
         ]
         navigationBar.largeTitleTextAttributes = [
             .foregroundColor : UIColor.primary,

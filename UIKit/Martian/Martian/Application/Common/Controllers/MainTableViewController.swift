@@ -12,6 +12,13 @@ class MainTableViewController: UITableViewController , TableViewControllerDesign
     var viewModel: ViewModel?
     var tableViewCells: [TableViewCellViewModel] = []
     
+    let leftItemLabel: UILabel = {
+        let label = UILabel()
+        label.font = Header.standart
+        label.textColor = .lightGreen
+        return label
+    }()
+    
     func assignViewModel() { } //No need to call super
     
     func setStandartInteractionOptions() { }
@@ -28,11 +35,8 @@ class MainTableViewController: UITableViewController , TableViewControllerDesign
     
     func makeNavBarTextItems(title: String?, subtitle: String?) {
         navigationItem.title = title
-        let label = UILabel()
-        label.font = Header.small
-        label.textColor = .lightGreen
-        label.text = subtitle
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: label)
+        leftItemLabel.text = subtitle
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftItemLabel)
     }
     
     func setHeaderAndFooter() {}

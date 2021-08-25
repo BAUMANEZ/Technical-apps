@@ -12,19 +12,25 @@ class CamerasTableViewController: MainTableViewController {
         return UserDefaults.standard.string(forKey: "chosen rover") ?? "Spirit"
     }
     
-    var selectedDate: Date!
-    
     override func registerCells() {
         tableView.register(PhotosCollectionCell.self, forCellReuseIdentifier: "PhotosCollectionCell")
         tableView.register(CameraNameCell.self, forCellReuseIdentifier: "CameraNameCell")
     }
     
     func makeNavBarButtons() {
-        let next = UIBarButtonItem(image: UIImage(named: "rightArrow"), style: .plain, target: self, action: nil)
-        let previous = UIBarButtonItem(image: UIImage(named: "leftArrow"), style: .plain, target: self, action: nil)
+        let next = UIBarButtonItem(image: UIImage(named: "rightArrow"), style: .plain, target: self, action: #selector(showNextDay))
+        let previous = UIBarButtonItem(image: UIImage(named: "leftArrow"), style: .plain, target: self, action: #selector(showPreviousDay))
         next.tintColor = .primary
         previous.tintColor = .primary
         navigationItem.rightBarButtonItems = [next, previous]
+    }
+    
+    @objc func showNextDay() {
+        (viewModel as? CamerasViewModel)?.switchDate(.next)
+    }
+    
+    @objc func showPreviousDay() {
+        (viewModel as? CamerasViewModel)?.switchDate(.previous)
     }
     
     override func assignViewModel() {
@@ -32,8 +38,11 @@ class CamerasTableViewController: MainTableViewController {
         viewModel?.bindViewModelToView = { [weak self] in
             guard
                 let self = self,
-                let photos = (self.viewModel?.model as? PhotosList)?.photos
+                let camerasViewModel = self.viewModel as? CamerasViewModel,
+                let photos = (camerasViewModel.model as? PhotosList)?.photos,
+                let date = camerasViewModel.date
             else { return }
+            camerasViewModel.loadDate()
             self.tableViewCells.removeAll()
             let cameraNames = photos.map { $0.camera.name }.uniqued()
             cameraNames.forEach { cameraName in
@@ -57,6 +66,7 @@ class CamerasTableViewController: MainTableViewController {
                                                   photos: photosFromTheCamera)
                 ]
             }
+            self.leftItemLabel.text = DateFormatter().string(from: date, format: "dd.MM.yy")
             self.tableView.reloadData()
         }
     }
@@ -79,7 +89,7 @@ class CamerasTableViewController: MainTableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        makeNavBarTextItems(title: selectedRoverName, subtitle: "")
+        makeNavBarTextItems(title: selectedRoverName, subtitle: "Loading...")
     }
     
     override func viewDidAppear(_ animated: Bool) {

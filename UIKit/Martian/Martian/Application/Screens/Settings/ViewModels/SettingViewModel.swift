@@ -21,16 +21,4 @@ class SettingsViewModel: StandartViewModel {
     func getRoversFrom(_ model: Decodable) {
         self.model = model
     }
-//    func updateModel(completion: (() -> ())? = nil) {
-//        APIRequest.shared.parseRovers { [weak self] result in
-//            guard let self = self else { return }
-//            switch result {
-//            case .success(let rovers):
-//                self.model = rovers
-//            case .failure(let error):
-//                debugPrint(error.localizedDescription)
-//            }
-//            completion?()
-//        }
-//    }
 }

@@ -10,7 +10,7 @@ import UIKit
 
 protocol Networking: AnyObject {
     func didLoad(roverList: RoversList)
-    func didLoad(maxDate: String?)
+    func didLoadDate()
 }
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -28,8 +28,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 let maxDate = rovers.rovers.first(where: {
                     $0.name == selectedRoverName
                 })?.maxDate
-                UserDefaults.standard.set(maxDate, forKey: "max date")
-                self.networkDelegate?.didLoad(maxDate: maxDate)
+                UserDefaults.standard.set(maxDate, forKey: "date")
+                self.networkDelegate?.didLoadDate()
                 self.networkDelegate?.didLoad(roverList: rovers)
             case .failure(_):
                 //Possible feature: show 💩 or ☹️
@@ -40,12 +40,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
+        loadInitialData()
         let viewController = MainTabBarController()
         networkDelegate = viewController
         window = UIWindow(windowScene: scene)
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
-        loadInitialData()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

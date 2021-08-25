@@ -19,7 +19,7 @@ class CameraNameCell: UITableViewCell, TableViewRepresentable {
     }
     
     private func configureCameraNameLabel() {
-        cameraNameLabel.setStyle(font: Header.normal, textAlignment: .left, textColor: .primary)
+        cameraNameLabel.setStyle(font: Header.medium, textAlignment: .left, textColor: .primary)
         cameraNameLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
     }
 

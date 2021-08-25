@@ -18,13 +18,18 @@ class CamerasViewModel: StandartViewModel {
         let increment: Int = switcher == DateSwitch.next ? 1 : -1
         if let previousDate = date {
             date = Calendar.current.date(byAdding: .day, value: increment, to: previousDate)
+            let newDateString = DateFormatter().string(from: date ?? Date(), format: "yyyy-MM-dd")
+            UserDefaults.standard.set(newDateString, forKey: "date")
         }
         update()
     }
     
-    func loadDateFrom(_ maxDate: String?) {
-        if let maxDate = maxDate {
-            date = DateFormatter().date(from: maxDate)
+    func loadDate() {
+        if let dateString = UserDefaults.standard.string(forKey: "date") {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            date = dateFormatter.date(from: dateString)
+            update()
         }
     }
     
@@ -38,5 +43,10 @@ class CamerasViewModel: StandartViewModel {
                 debugPrint(error.localizedDescription)
             }
         }
+    }
+    
+    override init() {
+        super.init()
+        self.update()
     }
 }

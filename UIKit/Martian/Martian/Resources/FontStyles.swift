@@ -8,9 +8,10 @@
 import UIKit
 
 struct Header {
-    static let big    = UIFont(name: "Helvetica-Bold", size: 34)
-    static let normal = UIFont(name: "Helvetica-Bold", size: 16)
-    static let small  = UIFont(name: "Helvetica-Bold", size: 8)
+    static let big      = UIFont(name: "Helvetica-Bold", size: 34)
+    static let medium   = UIFont(name: "Helvetica-Bold", size: 16)
+    static let standart = UIFont(name: "Helvetica-Bold", size: 12)
+    static let small    = UIFont(name: "Helvetica-Bold", size: 8)
     private init() {}
 }
 

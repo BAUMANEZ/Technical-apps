@@ -54,12 +54,12 @@ extension MainTabBarController {
 }
 
 extension MainTabBarController: Networking {
-    func didLoad(maxDate: String?) {
+    func didLoadDate() {
         if
             let navigationController = viewControllers?[0] as? UINavigationController,
             let camerasViewController = navigationController.viewControllers.first as? CamerasTableViewController
         {
-            (camerasViewController.viewModel as? CamerasViewModel)?.loadDateFrom(maxDate)
+            (camerasViewController.viewModel as? CamerasViewModel)?.loadDate()
         }
     }
     
