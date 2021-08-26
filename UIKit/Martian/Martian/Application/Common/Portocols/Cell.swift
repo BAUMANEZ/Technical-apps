@@ -27,6 +27,18 @@ protocol Delegatable: AnyObject {
     var delegate: CellDelegate? { get set }
 }
 
+protocol TappableAndDelegatable: Delegatable {
+    func addTapGestureTo(view: UIView, _ selector: Selector)
+}
+
+extension TappableAndDelegatable {
+    func addTapGestureTo(view: UIView, _ selector: Selector) {
+        let tapGesture = UITapGestureRecognizer(target: self, action: selector)
+        view.addGestureRecognizer(tapGesture)
+        view.isUserInteractionEnabled = true
+    }
+}
+
 protocol TableViewRepresentable: CellIdentifiable, TableViewCellViewModelSettable {}
 
 

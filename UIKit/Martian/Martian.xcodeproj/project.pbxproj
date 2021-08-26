@@ -19,6 +19,7 @@
 		8407E58226D683F80000DD85 /* CameraNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407E58126D683F80000DD85 /* CameraNameCell.swift */; };
 		8407E58426D684050000DD85 /* CameraNameCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407E58326D684050000DD85 /* CameraNameCellViewModel.swift */; };
 		8407E58626D6B8750000DD85 /* PhotosCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407E58526D6B8750000DD85 /* PhotosCollectionViewController.swift */; };
+		8434C98E26D782300093FE3C /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434C98D26D782300093FE3C /* PhotoViewController.swift */; };
 		8440C56F26D38B7A001925DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440C56E26D38B7A001925DC /* AppDelegate.swift */; };
 		8440C57126D38B7A001925DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440C57026D38B7A001925DC /* SceneDelegate.swift */; };
 		8440C57826D38B7D001925DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8440C57726D38B7D001925DC /* Assets.xcassets */; };
@@ -63,6 +64,7 @@
 		8407E58126D683F80000DD85 /* CameraNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraNameCell.swift; sourceTree = "<group>"; };
 		8407E58326D684050000DD85 /* CameraNameCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraNameCellViewModel.swift; sourceTree = "<group>"; };
 		8407E58526D6B8750000DD85 /* PhotosCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewController.swift; sourceTree = "<group>"; };
+		8434C98D26D782300093FE3C /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		8440C56B26D38B7A001925DC /* Martian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Martian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8440C56E26D38B7A001925DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8440C57026D38B7A001925DC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 			children = (
 				84F59F4626D419F600B0EADC /* CamerasTableViewController.swift */,
 				8407E58526D6B8750000DD85 /* PhotosCollectionViewController.swift */,
+				8434C98D26D782300093FE3C /* PhotoViewController.swift */,
 				8407E56E26D4F22C0000DD85 /* Cells */,
 			);
 			path = Views;
@@ -440,6 +443,7 @@
 				8440C5BA26D3DA87001925DC /* SettingViewModel.swift in Sources */,
 				8440C59826D39B91001925DC /* Anchors.swift in Sources */,
 				8407E58226D683F80000DD85 /* CameraNameCell.swift in Sources */,
+				8434C98E26D782300093FE3C /* PhotoViewController.swift in Sources */,
 				8440C59E26D3A4CA001925DC /* MainTableViewController.swift in Sources */,
 				8407E56B26D4EA5B0000DD85 /* PhotoCellViewModel.swift in Sources */,
 				8440C5C826D3EF08001925DC /* TableView.swift in Sources */,

@@ -7,7 +7,9 @@
 
 import UIKit
 
-class PhotosCollectionCell: UITableViewCell, TableViewRepresentable,CollectionViewCellDisplayable {
+class PhotosCollectionCell: UITableViewCell, TableViewRepresentable, CollectionViewCellDisplayable, Delegatable {
+    weak var delegate: CellDelegate?
+    
     var collectionViewCells: [CollectionViewCellViewModel] = []
     var cellIndentifier: String = "PhotosCollectionCell"
     
@@ -33,6 +35,7 @@ class PhotosCollectionCell: UITableViewCell, TableViewRepresentable,CollectionVi
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        selectionStyle = .none
         configureSubviews()
         photosCollectionView.register(PhotoCell.self, forCellWithReuseIdentifier: "PhotoCell")
     }
@@ -57,11 +60,18 @@ extension PhotosCollectionCell: UICollectionViewDataSource, UICollectionViewDele
         else {
             return UICollectionViewCell()
         }
+        (cell as? Delegatable)?.delegate = delegate
         cell.setViewModel(cellViewModel)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 138, height: .photoCellSmallHeight)
+    }
+}
+
+extension PhotosCollectionCell: PhotoCellDelegate {
+    func didTapPhoto(with image: UIImage?) {
+        (delegate as? PhotoCellDelegate)?.didTapPhoto(with: image)
     }
 }

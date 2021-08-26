@@ -25,3 +25,5 @@ extension PhotosCollectionViewController: UICollectionViewDelegateFlowLayout {
         return UIEdgeInsets(top: 0, left: .largeMargin, bottom: 0, right: .largeMargin)
     }
 }
+
+extension PhotosCollectionViewController: PhotoCellDelegate {}

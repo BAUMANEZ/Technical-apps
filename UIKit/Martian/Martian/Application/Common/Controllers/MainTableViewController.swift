@@ -82,6 +82,4 @@ class MainTableViewController: UITableViewController , TableViewControllerDesign
     
 }
 
-extension MainTableViewController: CellDelegate {
-    
-}
+extension MainTableViewController: CellDelegate { }

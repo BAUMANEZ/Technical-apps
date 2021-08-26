@@ -8,11 +8,24 @@
 import UIKit
 import Nuke
 
+protocol PhotoCellDelegate: CellDelegate {
+    func didTapPhoto(with image: UIImage?)
+}
+
+extension PhotoCellDelegate where Self: UIViewController {
+    func didTapPhoto(with image: UIImage?) {
+        let photoViewController = PhotoViewController(image: image)
+        photoViewController.modalPresentationStyle = .formSheet
+        (self as? UIViewController)?.present(photoViewController, animated: true)
+    }
+}
+
 enum ImageScaleMode {
     case big, small
 }
 
-class PhotoCell: UICollectionViewCell, CollectionViewRepresentable {
+class PhotoCell: UICollectionViewCell, CollectionViewRepresentable, TappableAndDelegatable {
+    weak var delegate: CellDelegate?
     
     var cellIndentifier: String = "PhotoCell"
     private var imageScaleMode: ImageScaleMode = .small {
@@ -41,6 +54,8 @@ class PhotoCell: UICollectionViewCell, CollectionViewRepresentable {
         imageScaleMode = photoCellViewModel.imageScaleMode
     }
     
+    //MARK: - Title
+    
     private func configureTitleLabel() {
         titleLabel.setStyle(font: Body.normal, textAlignment: .left, numberOfLines: 1, textColor: .primary)
         
@@ -49,6 +64,8 @@ class PhotoCell: UICollectionViewCell, CollectionViewRepresentable {
             .relative(attribute: .firstBaseline, relation: .equal, relatedTo: .bottom, multiplier: 1, constant: 24)
         ], relativeTo: imageView)
     }
+    
+    //MARK: - Subtitle
     
     private func configureSubtitleLabel() {
         subtitleLabel.setStyle(font: Header.small, textAlignment: .left, numberOfLines: 1, textColor: .lightGreen)
@@ -63,10 +80,16 @@ class PhotoCell: UICollectionViewCell, CollectionViewRepresentable {
         ], relativeTo: titleLabel)
     }
     
+    //MARK: - Image
+    @objc func didTapImage() {
+        (delegate as? PhotoCellDelegate)?.didTapPhoto(with: imageView.image)
+    }
+    
     private func configureImageView() {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 4
         imageView.clipsToBounds = true
+        addTapGestureTo(view: imageView, #selector(didTapImage))
         
         imageView.activate(anchors: [
             .leading(0),

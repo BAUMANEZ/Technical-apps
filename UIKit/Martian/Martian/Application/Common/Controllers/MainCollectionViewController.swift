@@ -66,7 +66,10 @@ class MainCollectionViewController: UICollectionViewController, ViewModelConnect
         else {
             return UICollectionViewCell()
         }
+        (cell as? Delegatable)?.delegate = self
         cell.setViewModel(cellViewModel)
         return cell
     }
 }
+
+extension MainCollectionViewController: CellDelegate {}

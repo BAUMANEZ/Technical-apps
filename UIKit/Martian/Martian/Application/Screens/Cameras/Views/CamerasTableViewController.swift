@@ -131,3 +131,5 @@ extension CamerasTableViewController: CameraNameCellDelegate {
         navigationController?.pushViewController(photosCollectionViewController, animated: true)
     }
 }
+
+extension CamerasTableViewController: PhotoCellDelegate {}
