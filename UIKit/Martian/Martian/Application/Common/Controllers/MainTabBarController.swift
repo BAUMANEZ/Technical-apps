@@ -68,6 +68,7 @@ extension MainTabBarController: Networking {
             let settingsViewController = navigationController.viewControllers.first as? SettingsTableViewController
         {
             (settingsViewController.viewModel as? SettingsViewModel)?.getRoversFrom(roverList)
+            settingsViewController.hideSpinner()
         }
     }
 }

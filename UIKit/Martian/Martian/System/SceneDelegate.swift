@@ -31,8 +31,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 UserDefaults.standard.set(maxDate, forKey: "date")
                 self.networkDelegate?.didLoadDate()
                 self.networkDelegate?.didLoad(roverList: rovers)
-            case .failure(_):
-                //Possible feature: show 💩 or ☹️
+            case .failure(let error):
+                let alert = UIAlertController(title: "Oops 💩", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Okay 😢", style: .cancel))
+                self.window?.rootViewController?.present(alert, animated: true)
                 return
             }
         }

@@ -20,6 +20,7 @@
 		8407E58426D684050000DD85 /* CameraNameCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407E58326D684050000DD85 /* CameraNameCellViewModel.swift */; };
 		8407E58626D6B8750000DD85 /* PhotosCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407E58526D6B8750000DD85 /* PhotosCollectionViewController.swift */; };
 		8434C98E26D782300093FE3C /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434C98D26D782300093FE3C /* PhotoViewController.swift */; };
+		8434C99026D78BE60093FE3C /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434C98F26D78BE60093FE3C /* ActivityIndicator.swift */; };
 		8440C56F26D38B7A001925DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440C56E26D38B7A001925DC /* AppDelegate.swift */; };
 		8440C57126D38B7A001925DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440C57026D38B7A001925DC /* SceneDelegate.swift */; };
 		8440C57826D38B7D001925DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8440C57726D38B7D001925DC /* Assets.xcassets */; };
@@ -65,6 +66,7 @@
 		8407E58326D684050000DD85 /* CameraNameCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraNameCellViewModel.swift; sourceTree = "<group>"; };
 		8407E58526D6B8750000DD85 /* PhotosCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewController.swift; sourceTree = "<group>"; };
 		8434C98D26D782300093FE3C /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
+		8434C98F26D78BE60093FE3C /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		8440C56B26D38B7A001925DC /* Martian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Martian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8440C56E26D38B7A001925DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8440C57026D38B7A001925DC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				8440C5C726D3EF08001925DC /* TableView.swift */,
 				8407E57D26D51D8A0000DD85 /* Date.swift */,
 				8407E57F26D53B440000DD85 /* Sequence.swift */,
+				8434C98F26D78BE60093FE3C /* ActivityIndicator.swift */,
 			);
 			path = Extenstions;
 			sourceTree = "<group>";
@@ -430,6 +433,7 @@
 				8440C56F26D38B7A001925DC /* AppDelegate.swift in Sources */,
 				8440C5C626D3E59B001925DC /* Constants.swift in Sources */,
 				8440C57126D38B7A001925DC /* SceneDelegate.swift in Sources */,
+				8434C99026D78BE60093FE3C /* ActivityIndicator.swift in Sources */,
 				8440C5A226D3A4F9001925DC /* Designable.swift in Sources */,
 				8407E56D26D4EAD70000DD85 /* MainCollectionViewController.swift in Sources */,
 				8407E58026D53B440000DD85 /* Sequence.swift in Sources */,

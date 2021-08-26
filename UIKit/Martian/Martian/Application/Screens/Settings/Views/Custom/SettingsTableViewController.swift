@@ -39,7 +39,7 @@ class SettingsTableViewController: MainTableViewController {
         UserDefaults.standard.set(newMaxDate, forKey: "date")
     }
     
-    private func changeRover(from indexPath: IndexPath) {
+    private func changeRover(at indexPath: IndexPath) {
         let newRoverPosition = indexPath.row
         guard
             let oldRoverName = UserDefaults.standard.string(forKey: "chosen rover"),
@@ -68,11 +68,12 @@ class SettingsTableViewController: MainTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        showSpinner()
         makeNavBarTextItems(title: "Марсоход", subtitle: "ВЫБИРАЕМ")
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        changeRover(from: indexPath)
+        changeRover(at: indexPath)
     }
 }
 

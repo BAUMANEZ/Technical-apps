@@ -35,6 +35,7 @@ class CamerasTableViewController: MainTableViewController {
     
     override func assignViewModel() {
         viewModel = CamerasViewModel()
+        showSpinner()
         viewModel?.bindViewModelToView = { [weak self] in
             guard
                 let self = self,
@@ -42,7 +43,6 @@ class CamerasTableViewController: MainTableViewController {
                 let photos = (camerasViewModel.model as? PhotosList)?.photos,
                 let date = camerasViewModel.date
             else { return }
-            camerasViewModel.loadDate()
             self.tableViewCells.removeAll()
             let cameraNames = photos.map { $0.camera.name }.uniqued()
             cameraNames.forEach { cameraName in
@@ -67,6 +67,7 @@ class CamerasTableViewController: MainTableViewController {
                                                   photos: photosFromTheCamera)
                 ]
             }
+            self.hideSpinner()
             self.leftItemLabel.text = DateFormatter().string(from: date, format: "dd.MM.yy")
             self.tableView.reloadData()
         }
@@ -94,7 +95,7 @@ class CamerasTableViewController: MainTableViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        (viewModel as? CamerasViewModel)?.update()
+        (viewModel as? CamerasViewModel)?.loadDate()
     }
 }
 

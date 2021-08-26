@@ -12,7 +12,9 @@ class StandartViewModel: ViewModel {
     
     var model: Decodable? {
         didSet {
-            bindViewModelToView?()
+            DispatchQueue.main.async {
+                self.bindViewModelToView?()
+            }
         }
     }
 }

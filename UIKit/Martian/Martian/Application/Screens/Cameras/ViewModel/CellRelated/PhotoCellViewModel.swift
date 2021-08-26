@@ -13,4 +13,5 @@ struct PhotoCellViewModel: CollectionViewCellViewModel {
     var imageScaleMode: ImageScaleMode
     var title: String?
     var subtitle: String?
+
 }

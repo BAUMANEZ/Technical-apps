@@ -33,7 +33,7 @@ class CamerasViewModel: StandartViewModel {
         }
     }
     
-    func update() {
+    private func update() {
         APIRequest.shared.parsePhotos(for: date ?? Date()) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -43,10 +43,5 @@ class CamerasViewModel: StandartViewModel {
                 debugPrint(error.localizedDescription)
             }
         }
-    }
-    
-    override init() {
-        super.init()
-        self.update()
     }
 }
